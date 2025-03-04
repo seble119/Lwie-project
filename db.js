@@ -1,11 +1,11 @@
-const Pool = require("pg").Pool;
-const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "user_registration",
-    password: "12212729",
-    port: 5432,
+const { Pool } = require("pg");
+require("dotenv").config(); // Load environment variables
 
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false, // Required for Render.com PostgreSQL
+    },
 });
 
 module.exports = pool;
